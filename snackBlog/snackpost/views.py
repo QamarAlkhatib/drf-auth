@@ -3,13 +3,14 @@ from django.shortcuts import render
 from rest_framework import generics
 from .containerize import PostSerializer
 from .models import Post
+from .permissions import IsAuthenticatedOrReadOnly
 
-
-class PostList(generics.ListAPIView):
-    
+class PostList(generics.ListCreateAPIView):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Post.objects.all()   
     serializer_class = PostSerializer
 
-class PostDetail(generics.RetrieveUpdateAPIView):
+class PostDetail(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = Post.objects.all()   
     serializer_class = PostSerializer
