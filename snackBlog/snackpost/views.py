@@ -6,11 +6,11 @@ from .models import Post
 from .permissions import IsAuthenticatedOrReadOnly
 
 class PostList(generics.ListCreateAPIView):
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_class = (IsAuthenticatedOrReadOnly,)
     queryset = Post.objects.all()   
     serializer_class = PostSerializer
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_class = (IsAuthenticatedOrReadOnly,)
     queryset = Post.objects.all()   
     serializer_class = PostSerializer
